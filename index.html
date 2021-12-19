@@ -2,11 +2,12 @@
 
 <html lang="en">
 
-<script>
+<script> type="text/javascript"
     var liste = ["Eda","Aybüke","Berkay","Ahmet","Erim","Civan","Efe","Melih","Tuana","Mustafa","Erim","Buse"]
     Array.prototype.random = function () {
   return this[Math.floor((Math.random()*this.length))];
 }
+ducoment.getElementById("text").innerHTML = liste.random()
 </script>
 <head>
 
@@ -23,7 +24,7 @@
 </body>
 -->
 <p style="text-align:center"><img src="Adsız.jpg"></p>
-<h1 style="text-align: center;font-size:75px;">Merhaba + <script>liste.random()</script>  </h1>
+<h1 id="text" style="text-align: center;font-size:75px;"></h1>
 <!--<p style="text-align:center"><img src="pray.jpg"></p>-->
 </html>
 
