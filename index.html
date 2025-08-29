@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Turkish Phrase Reverser</title>
     <script>
-      const alfabe = " abcçdefgğhıijklmnoöprsştuüvyz ";
+      const alfabe = "abcçdefgğhıijklmnoöprsştuüvyz";
       const tersAlfabe = alfabe.split("").reverse().join("");
       let bos = "";
 
@@ -21,7 +21,7 @@
             const index = alfabe.indexOf(harf);
             bos = bos + tersAlfabe[index];
           } else {
-            console.log("Harf bulunamadı:", harf);
+            bos = bos + " ";
           }
         }
         result.textContent = bos;
