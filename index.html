@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simple Input Form</title>
+    <script>
+      const alfabe = "abcçdefgğhıijklmnoöprsştuüvyz";
+      const tersAlfabe = alfabe.split("").reverse().join("");
+      let bos = "";
+
+      function handleSubmit(event) {
+        event.preventDefault();
+        const result = document.getElementById("result");
+        const input = event.target.querySelector('input[type="text"]');
+        const isim = input.value.toLowerCase();
+        bos = ""; // Reset bos for each submission
+
+        for (let harf of isim) {
+          if (alfabe.includes(harf)) {
+            const index = alfabe.indexOf(harf);
+            bos = bos + tersAlfabe[index];
+          } else {
+            console.log("Harf bulunamadı:", harf);
+          }
+        }
+        result.textContent = bos;
+      }
+    </script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      #result {
+        margin-top: 2rem;
+        color: #333;
+      }
+      .container {
+        background: white;
+        padding: 2rem;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        min-width: 400px;
+        text-align: center;
+      }
+
+      h1 {
+        color: #333;
+        margin-bottom: 1.5rem;
+        font-weight: 300;
+      }
+
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
+
+      input[type="text"] {
+        width: 100%;
+        padding: 15px;
+        border: 2px solid #e1e5e9;
+        border-radius: 8px;
+        font-size: 16px;
+        transition: border-color 0.3s ease;
+        outline: none;
+      }
+
+      input[type="text"]:focus {
+        border-color: #667eea;
+      }
+
+      button {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        padding: 15px 30px;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        font-weight: 500;
+      }
+
+      button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+      }
+
+      button:active {
+        transform: translateY(0);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Simple Form</h1>
+      <form onsubmit="handleSubmit(event)">
+        <div class="form-group">
+          <input type="text" placeholder="Enter your text here..." required />
+        </div>
+        <button type="submit">Submit</button>
+      </form>
+      <h1 id="result"></h1>
+    </div>
+  </body>
+</html>
