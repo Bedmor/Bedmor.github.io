@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Turkish Phrase Reverser</title>
     <script>
+      function shiftlist(alfabe, shift) {
+        if (shift === 0) return alfabe; // No shift needed
+        const len = alfabe.length;
+        shift = ((shift % len) + len) % len; // Normalize shift value
+        return alfabe.slice(shift) + alfabe.slice(0, shift);
+      }
       function copyToClipboard() {
         const result = document.getElementById("result");
         const textArea = document.createElement("textarea");
@@ -15,13 +21,16 @@
         document.body.removeChild(textArea);
       }
       const alfabe = "abcçdefgğhıijklmnoöprsştuüvyz";
-      const tersAlfabe = alfabe.split("").reverse().join("");
+      let tersAlfabe = alfabe.split("").reverse().join("");
       let bos = "";
 
       function handleSubmit(event) {
         event.preventDefault();
         const result = document.getElementById("result");
         const input = event.target.querySelector('input[type="text"]');
+        const shiftInput = event.target.querySelector('input[type="number"]');
+        const shift = parseInt(shiftInput.value) || 0;
+        tersAlfabeShift = shiftlist(tersAlfabe, shift);
         const isim = input.value.toLowerCase();
         bos = ""; // Reset bos for each submission
 
@@ -29,10 +38,10 @@
           if (alfabe.includes(harf)) {
             if (harf.toUpperCase() === harf) {
               const index = alfabe.indexOf(harf.toLowerCase());
-              bos = bos + tersAlfabe[index].toUpperCase();
+              bos = bos + tersAlfabeShift[index].toUpperCase();
             } else {
               const index = alfabe.indexOf(harf);
-              bos = bos + tersAlfabe[index];
+              bos = bos + tersAlfabeShift[index];
             }
           } else {
             bos = bos + " ";
@@ -66,8 +75,10 @@
         padding: 2rem;
         border-radius: 15px;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        min-width: 400px;
+        min-width: 200px;
         text-align: center;
+        overflow: hidden;
+        margin: 0 -1rem;
       }
 
       h1 {
@@ -93,7 +104,7 @@
         margin-bottom: 1.5rem;
       }
 
-      input[type="text"] {
+      input {
         width: 100%;
         padding: 15px;
         border: 2px solid #e1e5e9;
@@ -102,8 +113,11 @@
         transition: border-color 0.3s ease;
         outline: none;
       }
+      input + input {
+        margin-top: 1rem;
+      }
 
-      input[type="text"]:focus {
+      input:focus {
         border-color: #667eea;
       }
 
@@ -120,8 +134,8 @@
       }
       .reset-button {
         position: relative;
-        left: 9rem;
-        bottom: 2.25rem;
+        bottom: 6.6rem;
+        left: 12rem;
         background: transparent;
         border: none;
         width: min-content;
@@ -146,6 +160,12 @@
         <div class="form-group">
           <div class="form-group2">
             <input type="text" placeholder="Metni girin..." required />
+            <input
+              type="number"
+              placeholder="Şifreleme Anahtarı"
+              value="0"
+              required
+            />
             <button class="reset-button" type="reset">X</button>
           </div>
         </div>
@@ -153,7 +173,20 @@
       </form>
       <div style="display: flexbox; flex-direction: row">
         <h1 id="result"></h1>
-        <button style="width: fit-content; height: fit-content; background: transparent; border: none; padding: 2; color: #333;" onclick="copyToClipboard()" id="copy-button">Kopyala 📋</button>
+        <button
+          style="
+            width: fit-content;
+            height: fit-content;
+            background: transparent;
+            border: none;
+            padding: 2;
+            color: #333;
+          "
+          onclick="copyToClipboard()"
+          id="copy-button"
+        >
+          Kopyala 📋
+        </button>
       </div>
     </div>
     <h3>Yazdığınız şeyi alfabetik olarak ters çevirir.</h3>
