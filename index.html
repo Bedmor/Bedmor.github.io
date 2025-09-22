@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <script
+      src="https://kit.fontawesome.com/0cbd8f807c.js"
+      crossorigin="anonymous"
+    ></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Turkish Phrase Reverser</title>
@@ -133,15 +137,16 @@
         font-weight: 500;
       }
       .reset-button {
-        position: relative;
-        bottom: 6.6rem;
-        left: 12rem;
-        background: transparent;
+        background: #6c757d;
+        color: white;
         border: none;
-        width: min-content;
-        height: min-content;
-        padding: 0 0;
-        color: #333;
+        padding: 15px 20px;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        font-weight: 500;
+        flex: 0 0 auto;
       }
       button:hover {
         transform: translateY(-2px);
@@ -166,10 +171,14 @@
               value="0"
               required
             />
-            <button class="reset-button" type="reset">X</button>
           </div>
         </div>
-        <button type="submit">Çevir</button>
+        <div class="button-group">
+          <button type="submit">Çevir</button>
+          <button class="reset-button" type="reset">
+            <i class="fa-solid fa-rotate-right"></i>
+          </button>
+        </div>
       </form>
       <div style="display: flexbox; flex-direction: row">
         <h1 id="result"></h1>
