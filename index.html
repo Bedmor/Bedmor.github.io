@@ -52,9 +52,12 @@
           }
         }
         result.textContent = bos;
+        document.getElementById('result-wrapper').style.display = 'flex';
       }
     </script>
     <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+
       * {
         margin: 0;
         padding: 0;
@@ -62,143 +65,201 @@
       }
 
       body {
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        background: linear-gradient(135deg, #2f4ed8 0%, #764ba2 100%);
+        font-family: 'Inter', sans-serif;
+        background: radial-gradient(circle at top left, #4f46e5 0%, #0f172a 100%);
         min-height: 100vh;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-      }
-      #result {
-        margin-top: 2rem;
-        color: #333;
-      }
-      .container {
-        background: white;
-        padding: 2rem;
-        border-radius: 15px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        min-width: 200px;
-        text-align: center;
-        overflow: hidden;
-        margin: 0 -1rem;
+        color: #f8fafc;
+        overflow-x: hidden;
       }
 
-      h1 {
-        color: #333;
-        margin-bottom: 1.5rem;
+      .container {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 2.5rem;
+        border-radius: 20px;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        width: 100%;
+        max-width: 450px;
+        text-align: center;
+        margin-bottom: 2rem;
+        animation: fadeIn 0.6s ease-out;
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      h2 {
+        font-weight: 600;
+        font-size: 1.75rem;
+        margin-bottom: 2rem;
+        letter-spacing: -0.025em;
+        background: linear-gradient(to right, #a5b4fc, #c4b5fd);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      h3 {
+        color: #94a3b8;
+        font-size: 0.9rem;
+        font-weight: 400;
+        margin-bottom: 0.5rem;
+      }
+
+      h4 {
+        color: #64748b;
+        font-size: 0.8rem;
         font-weight: 300;
       }
-      h2 {
-        color: white;
-        margin-bottom: 1.5rem;
-        font-weight: 500;
-      }
-      h3 {
-        color: white;
-        margin-top: 1rem;
-        font-weight: lighter;
-      }
-      .form-group2 {
-        display: flexbox;
-        flex-direction: column;
-      }
+
       .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
         margin-bottom: 1.5rem;
       }
 
       input {
         width: 100%;
-        padding: 15px;
-        border: 2px solid #e1e5e9;
-        border-radius: 8px;
-        font-size: 16px;
-        transition: border-color 0.3s ease;
+        padding: 16px;
+        background: rgba(15, 23, 42, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: #f8fafc;
+        border-radius: 12px;
+        font-size: 1rem;
+        transition: all 0.3s ease;
         outline: none;
       }
-      input + input {
-        margin-top: 1rem;
+      
+      input::placeholder {
+        color: #64748b;
       }
 
       input:focus {
-        border-color: #667eea;
+        border-color: #818cf8;
+        box-shadow: 0 0 0 4px rgba(129, 140, 248, 0.15);
+      }
+
+      .button-group {
+        display: flex;
+        gap: 0.75rem;
       }
 
       button {
-        background: linear-gradient(135deg, #2f4ed8 0%, #764ba2 100%);
+        flex: 1;
+        background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
         color: white;
         border: none;
-        padding: 15px 30px;
-        border-radius: 8px;
-        font-size: 16px;
+        padding: 16px 24px;
+        border-radius: 12px;
+        font-size: 1rem;
         cursor: pointer;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        transition: all 0.2s ease;
         font-weight: 500;
+        letter-spacing: 0.025em;
+        box-shadow: 0 4px 6px -1px rgba(99, 102, 241, 0.3);
       }
+
       .reset-button {
-        background: #6c757d;
-        color: white;
-        border: none;
-        padding: 15px 20px;
-        border-radius: 8px;
-        font-size: 16px;
-        cursor: pointer;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-        font-weight: 500;
         flex: 0 0 auto;
+        background: rgba(255, 255, 255, 0.1);
+        box-shadow: none;
+        border: 1px solid rgba(255, 255, 255, 0.1);
       }
+
       button:hover {
         transform: translateY(-2px);
-        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.4);
+      }
+
+      .reset-button:hover {
+        background: rgba(255, 255, 255, 0.15);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
       }
 
       button:active {
         transform: translateY(0);
       }
+
+      .result-wrapper {
+        margin-top: 2rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        animation: fadeIn 0.4s ease-out;
+      }
+
+      #result {
+        font-weight: 500;
+        font-size: 1.25rem;
+        color: #e2e8f0;
+        word-break: break-all;
+      }
+
+      #copy-button {
+        background: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: #cbd5e1;
+        padding: 8px 16px;
+        font-size: 0.875rem;
+        border-radius: 8px;
+        flex: none;
+        box-shadow: none;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin: 0;
+      }
+
+      #copy-button:hover {
+        background: rgba(255, 255, 255, 0.1);
+        color: #fff;
+        transform: none;
+        box-shadow: none;
+      }
     </style>
   </head>
   <body>
-    <h2>Reverse Alphabet Translator</h2>
     <div class="container">
+      <h2>Reverse Alphabet Translator</h2>
       <form onsubmit="handleSubmit(event)">
         <div class="form-group">
-          <div class="form-group2">
-            <input type="text" placeholder="Metni girin..." required />
-            <input
-              type="number"
-              placeholder="Şifreleme Anahtarı"
-              value="0"
-              required
-            />
-          </div>
+          <input type="text" placeholder="Metni girin..." required />
+          <input
+            type="number"
+            placeholder="Şifreleme Anahtarı"
+            value="0"
+            required
+          />
         </div>
         <div class="button-group">
           <button type="submit">Çevir</button>
-          <button class="reset-button" type="reset">
+          <button class="reset-button" type="reset" onclick="document.getElementById('result-wrapper').style.display='none'">
             <i class="fa-solid fa-rotate-right"></i>
           </button>
         </div>
       </form>
-      <div style="display: flexbox; flex-direction: row">
+      <div id="result-wrapper" class="result-wrapper">
         <h1 id="result"></h1>
         <button
-          style="
-            width: fit-content;
-            height: fit-content;
-            background: transparent;
-            border: none;
-            padding: 2;
-            color: #333;
-          "
           onclick="copyToClipboard()"
           id="copy-button"
         >
-          Kopyala 📋
+          <i class="fa-solid fa-copy"></i> Kopyala
         </button>
       </div>
     </div>
     <h3>Yazdığınız şeyi alfabetik olarak ters çevirir.</h3>
-    <h4>By Bedmor🐬</h4>
+    <h4>By acabesim🐬</h4>
   </body>
 </html>
