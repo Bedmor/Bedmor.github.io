@@ -34,21 +34,21 @@
         const input = event.target.querySelector('input[type="text"]');
         const shiftInput = event.target.querySelector('input[type="number"]');
         const shift = parseInt(shiftInput.value) || 0;
-        tersAlfabeShift = shiftlist(tersAlfabe, shift);
-        const isim = input.value.toLowerCase();
+        const tersAlfabeShift = shiftlist(tersAlfabe, shift);
+        const isim = input.value;
         bos = ""; // Reset bos for each submission
 
         for (let harf of isim) {
-          if (alfabe.includes(harf)) {
+          if (alfabe.includes(harf.toLowerCase())) {
             if (harf.toUpperCase() === harf) {
               const index = alfabe.indexOf(harf.toLowerCase());
               bos = bos + tersAlfabeShift[index].toUpperCase();
             } else {
-              const index = alfabe.indexOf(harf);
+              const index = alfabe.indexOf(harf.toLowerCase());
               bos = bos + tersAlfabeShift[index];
             }
           } else {
-            bos = bos + " ";
+            bos = bos + harf;
           }
         }
         result.textContent = bos;

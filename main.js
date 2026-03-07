@@ -10,18 +10,20 @@ const rl = readline.createInterface({
     output: process.stdout
 });
 
-rl.question('İsminizi giriniz: ', (isim) => {
-    isim = isim.toLowerCase();
-
-    for (let harf of isim) {
-        if (alfabe.includes(harf)) {
-            const index = alfabe.indexOf(harf);
-            bos = bos + tersAlfabe[index];
+rl.question('Cümlenizi giriniz: ', (cümle) => {
+    for (let harf of cümle) {
+        if (alfabe.includes(harf.toLowerCase())) {
+            const index = alfabe.indexOf(harf.toLowerCase());
+            if (harf.toUpperCase() === harf) {
+                bos = bos + tersAlfabe[index].toUpperCase();
+            } else {
+                bos = bos + tersAlfabe[index];
+            }
         } else {
-            process.stdout.write(harf);
+            bos = bos + harf;
         }
     }
 
-    console.log("\nTers çevrilmiş isim:", bos);
+    console.log("\nTers çevrilmiş cümle:", bos);
     rl.close();
 });
